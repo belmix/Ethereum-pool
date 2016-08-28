@@ -38,8 +38,5 @@ Now edit ethpool.py:
 2. First run ``` ./poolmaster/pool ```
 3. Start the pool server with ``` python ethpool.py ```
 
-## Donations
-Donations are always welcome:
-
-BTC: 13TRVwiqLMveg9aPAmZgcAix5ogKVgpe4T
-ETH: 0x18f081247ad32af38404d071eb8c246cc4f33534
+## contact 
+admin@belmix.ru
