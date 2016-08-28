@@ -34,7 +34,7 @@ import poloniex
 
 # Начальные параметры
 SECRET = "CHANGETHIS"
-SERVER_NAME = "192.168.10.244:5000"
+SERVER_NAME = "localhost:5000"
 SERVER_POOL = "localhost:5082"
 DBSHARE_FILE = "ethshares.db"
 DBPAYOUT_FILE = "ethpayout.db"
