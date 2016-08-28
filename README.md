@@ -9,6 +9,10 @@ This software includes:
 
 The software is not well tested and it's a work in progress, use at your own risk.
 
+## Install
+
+git clone https://github.com/belmix/Ethereum-pool.git
+
 ## Requirements
 
 * golang
