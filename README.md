@@ -13,7 +13,10 @@ The software is not well tested and it's a work in progress, use at your own ris
 
 git clone https://github.com/belmix/Ethereum-pool.git
 cd Ethereum-pool
-
+Change IP Front-end /usr/local/lib/python2.7/dist-packages/flask/
+/usr/local/lib/python2.7/dist-packages/flask/app.py
+"if host is None:
+            host = 'localhost'"
 ## Requirements
 
 * golang
@@ -42,7 +45,8 @@ Now edit ethpool.py:
 
 1. Start geth or similar with rpc ``` geth --rpc ```
 2. First run ``` ./poolmaster/pool ```
-3. Start the pool server with ``` python ethpool.py ```
+3. Start the pool server with ``` python ethpool.py start ```
+4. go http://localhost:5000/
 
 ## contact 
 admin@belmix.ru
