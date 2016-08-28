@@ -1,4 +1,4 @@
-![Miner's stats page]
+![Miner's stats page](https://raw.githubusercontent.com/belmix/Ethereum-pool/master/pool_main_eth.png)
 # Pool server
 
 This software includes:
