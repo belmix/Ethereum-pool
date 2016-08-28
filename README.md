@@ -11,12 +11,12 @@ The software is not well tested and it's a work in progress, use at your own ris
 
 ## Install
 
-git clone https://github.com/belmix/Ethereum-pool.git
-cd Ethereum-pool
-Change IP Front-end /usr/local/lib/python2.7/dist-packages/flask/
+* git clone https://github.com/belmix/Ethereum-pool.git
+* cd Ethereum-pool
+* Change IP Front-end /usr/local/lib/python2.7/dist-packages/flask/
 /usr/local/lib/python2.7/dist-packages/flask/app.py
-"if host is None:
-            host = 'localhost'"
+* "if host is None:
+        *   host = 'localhost'"
 ## Requirements
 
 * golang
