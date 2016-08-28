@@ -151,13 +151,17 @@ def foundBlock ():
 	bllock.acquire ()
 	bl = True
 	bllock.release ()
+	
+# Функция выплаты  используються две переменные address - адрес куда отправить и сколько
+# tx составная переменная для запроса на выплату, COINBASE константа указывается ранее c этого адреса уходит перевод
+# функция node_request запрос в geth на выплату в соотвествии с указанными в строке параметрами
 
-# Функция выплаты  используються две переменные address - адрес куда отправить, value - сколько отправить
-def sendTransaction (address, value)
-	# tx составная переменная для запроса на выплату, COINBASE константа указывается ранее c этого адреса уходит перевод
+def sendTransaction (address, value):
+
 	tx = { 'from': COINBASE, 'to': address, 'value': value }
-	# функция node_request запрос в geth на выплату в соотвествии с указанными в строке параметрами
+  
 	node_request ('eth_sendTransaction', [tx])
+
 
 
 def db_thread ():
