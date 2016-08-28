@@ -20,14 +20,22 @@ import poloniex
 
 # Начальные параметры
 SECRET = "CHANGETHIS"
+# адрес веб интерфейса должен совпадать с указаным в 
+# /usr/local/lib/python2.7/dist-packages/flask/app.py
 SERVER_NAME = "localhost:5000"
+# адрес пула для подключения майнеров
 SERVER_POOL = "localhost:5082"
+# базы данных
 DBSHARE_FILE = "ethshares.db"
 DBPAYOUT_FILE = "ethpayout.db"
+# объём блока, количество монет
 BLOCK_REWARD = 5.00
+# комиссия пула, остаётся на кошельке пула
 FEE = 0.2
+# адрес кошелька пула
 COINBASE = "0x88059a92c6a5777e015b432b11120abc26ae8bfe"
 polo = poloniex.Poloniex()
+# время запроса курса валют с polonex
 polo.timeout = 2
 # включение отладки в консоли
 DEBUG = True
