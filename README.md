@@ -1,3 +1,5 @@
+https://raw.githubusercontent.com/belmix/Ethereum-pool/master/pool_main.png
+
 # Pool server
 
 This software includes:
