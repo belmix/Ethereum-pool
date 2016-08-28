@@ -29,7 +29,7 @@ For first, configure the pool master:
 2. Choose a secure key, and replace the one proposed in line 46
 3. Set the poolPort at line 46; this will be used by pool miners
 4. Set the port of your ethereum daemon at line 47
-5. Enter the ethpool.py directory and run ``` ./make_poolmaster.sh ```
+5. Enter the "Ethereum-pool" directory and run ``` ./make_poolmaster.sh ```
 
 Now edit ethpool.py:
 
