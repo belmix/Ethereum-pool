@@ -1,0 +1,177 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags-->
+<meta name="description" content="The Ethereum Mining Pool">
+<meta name="author" content="ethpool.org">
+<meta name="keywords" content="ethereum, mining, pool, cryptocurrency, cryptocurrencies, bitcoin">
+<title>Balances - ethpool.org - The Ethereum Mining Pool</title>
+<!-- Bootstrap core CSS-->
+<link rel="stylesheet" href="static/bootstrap.min.css">
+<link rel="stylesheet" href="static/c3.min.css">
+<link rel="stylesheet" href="static/style.css">
+<style>body {
+padding-top: 50px;
+padding-bottom: 20px;
+}</style><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries--><!--if lt IE 9script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')-->
+<link rel="icon" href="static/favicon.ico">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.0.7/bignumber.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/1.5.3/numeral.min.js"></script>
+</head>
+
+
+<body role="document">
+<!-- <nav class="navbar navbar-fixed-top navbar-inverse">
+<div class="container">-->
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+<div class="container"">
+      <div class="navbar-header">
+              <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+      </button>
+
+<a href="/" class="navbar-brand"> <img src="static/mining_small.png" style="height: 25px"></a></div>
+   <div id="navbar" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+      <!--     <li class="active"><a href="/" title="Home">Home</a></li>-->
+          <li><a href="/" title="Home">Home</a></li>
+          <li><a href="/blocks" title="Blocks">Blocks</a></li>
+          <li><a href="/credits" title="Credits">Credits</a></li>
+          <li><a href="/stats" title="Statistics">Statistics</a></li>
+          <li><a href="/faq" title="FAQ">FAQ</a></li>
+          <li><a href="https://ethpool.freshdesk.com" title="Get Support">Get Support</a></li>
+     </ul> 
+     <p class="navbar-text">Next DAG: ( not implemented )</p>
+    </div>
+</div>
+</nav>
+
+<div class="container" style="margin-top: 90px" role="main">	
+<div class="col-md-12"><h2 class="text-center">Miner: <a href="https://etherchain.org/account/0x{{ address }}" target="_blank">{{ address }} </a> </h2></div>
+
+
+
+	<div align="center">
+
+		<div class="row" align="center">
+	                <div class="col-md-2 text-centre" align="center">
+				<!-- <div style="height: 130px; width:270px" class="panel panel-warning">-->
+                                <div style="height: 100px" class="panel panel-warning">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Hashrates</h3>
+				  </div>
+				  <div class="panel-body">
+				     <h4 class="panel-title">
+                                         
+                                     </h4>
+				  </div>
+				</div>
+			</div>
+			<div class="col-md-2  text-centre" align="center">
+				<div style="height: 100px" class="panel panel-info">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Credits</h3>
+				  </div>
+				  <div class="panel-body">
+				     <h4 class="panel-title">
+                                         
+                                     </h4>
+				  </div>
+				</div>
+			</div>
+
+			<div class="col-md-2  text-centre" align="center">
+				<div style="height: 100px" class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Next block</h3>
+				  </div>
+				  <div class="panel-body">
+				     <h4 class="panel-title">
+                                         
+                                     </h4>
+				  </div>
+				</div>
+			</div>
+
+			<div class="col-md-2  text-centre" align="center">
+				<div style="height: 100px" class="panel panel-success">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Active Workers</h3>
+				  </div>
+				  <div class="panel-body">
+				     <h4 class="panel-title">
+                                    
+                                     </h4>
+				  </div>
+				</div>
+			</div>
+
+			<div class="col-md-2  text-centre">
+				<div style="height: 100px" class="panel panel-danger">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Shares(Last 1h)</h3>
+				  </div>
+				  <div class="panel-body">
+				     <h4 class="panel-title">
+                                            {{ shares }}
+                                     </h4>
+				  </div>
+				</div>
+			</div>
+
+	<div class="col-md-2  text-centre" align="center">
+				<div style="height: 100px" class="panel panel-primary">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Price</h3>
+				  </div>
+				  <div class="panel-body">
+				
+				  </div>
+				</div>
+			</div>
+
+		</div>
+<h2>Payouts:(realese)</h2> 
+		<table class="table">
+		{% for payout in payouts %}
+		    <tr>{{ payout }}</tr>
+		{% endfor %}
+		</table>
+
+<h2>Hashrate, Shares & Workers:(not realese)</h2> 
+		<table class="table">
+		{% for payout in payouts %}
+		    <tr>{{ payout }}</tr>
+		{% endfor %}
+		</table>
+
+
+<h2>Workers:(not realese)</h2> 
+		<table class="table">
+		{% for payout in payouts %}
+		    <tr>{{ payout }}</tr>
+		{% endfor %}
+		</table>
+
+
+
+
+
+	</div>
+</div>
+<br>
+
+<hr><div class="container"><footer><p>© Ethpool 2016 | The Ethereum Mining Pool | <a href="https://ethpool.freshdesk.com">Contact us</a></p></footer></div></body></html>

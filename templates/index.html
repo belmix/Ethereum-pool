@@ -1,0 +1,230 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags-->
+<meta name="description" content="The Ethereum Mining Pool">
+<meta name="author" content="ethpool.org">
+<meta name="keywords" content="ethereum, mining, pool, cryptocurrency, cryptocurrencies, bitcoin">
+<title>Balances - ethpool.org - The Ethereum Mining Pool</title>
+<!-- Bootstrap core CSS-->
+<link rel="stylesheet" href="static/bootstrap.min.css">
+<link rel="stylesheet" href="static/c3.min.css">
+<link rel="stylesheet" href="static/style.css">
+
+<link rel="stylesheet" href="static/font-mfizz.css">
+<link rel="stylesheet" href="static/font-awesome.css">
+
+<style>body {
+padding-top: 50px;
+padding-bottom: 20px;
+}</style><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries--><!--if lt IE 9script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')-->
+<link rel="icon" href="static/favicon.ico">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.0.7/bignumber.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/1.5.3/numeral.min.js"></script>
+</head>
+
+
+<body role="document">
+<!-- <nav class="navbar navbar-fixed-top navbar-inverse">
+<div class="container">-->
+
+
+<nav class="navbar navbar-default navbar-fixed-top">
+<div class="container"">
+      <div class="navbar-header">
+              <button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+      </button>
+
+<a href="/" class="navbar-brand"> <img src="static/mining_small.png" style="height: 25px"></a></div>
+   <div id="navbar" class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+          <li class="active"><a href="/" title="Home">Home</a></li>
+            <li><a href="/blocks" title="Blocks">Blocks</a></li>
+          <li><a href="/credits" title="Credits">Credits</a></li>
+          <li><a href="/stats" title="Statistics">Statistics</a></li>
+          <li><a href="/faq" title="FAQ">FAQ</a></li>
+          <li><a href="" title="Get Support">Get Support</a></li>
+     </ul> 
+     <p class="navbar-text">Next DAG: ( not implemented )</p>
+    </div>
+</div>
+</nav>
+
+<div id="home" class="container"><div class="row">     <div class="col-md-2 text-center"><img src="static/mining.png"></div><div style="margin-top: 30px" class="col-md-10"><h4 class="text-center">This is a <b>predictable </b>solo mining pool (not implemented). 100% of the block reward will be credited to the miner who did contribute the most work to the pool. Check out the <a href="/credits">credits</a> section for more infos. Rewards are paid immediately after 10 confirmations. Pool fee is currently 1%! Servers located in Europe, Asia and North America!</h4></div></div>
+
+
+
+
+
+
+
+ <!--   <div class="container" style="margin-top: 90px" role="main">	-->
+<div class="col-md-12"><h1 class="text-center">Pool Status</h1></div>
+<div align="center">
+<br>
+<p></p></div>
+	<div align="center">
+
+		<div class="row" align="center">
+	                <div class="col-md-2 text-centre" align="center">
+				<!-- <div style="height: 130px; width:270px" class="panel panel-warning">-->
+                                <div style="height: 105px" class="panel panel-warning">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Hashrates</h3>
+				  </div>
+				  <div class="panel-body">
+				     <h4 class="panel-title">
+                                           {{ Hashrate }}
+                                     </h4>
+				  </div>
+				</div>
+			</div>
+			<div class="col-md-2  text-centre" align="center">
+				<div style="height: 105px" class="panel panel-success">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Round work</h3>
+				  </div>
+				  <div class="panel-body">
+				    {{ cround['shares'] }}
+				  </div>
+				</div>
+			</div>
+
+			<div class="col-md-2  text-centre" align="center">
+				<div style="height: 105px" class="panel panel-info">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Active Miners</h3>
+				  </div>
+				  <div class="panel-body">
+				     {{ cround['miners'] }}
+				  </div>
+				</div>
+			</div>
+			<div class="col-md-2  text-centre" align="center">
+				<div style="height: 105px" class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Active Workers</h3>
+				  </div>
+				  <div class="panel-body">
+				(not implemented)
+				  </div>
+				</div>
+			</div> 
+			<div class="col-md-2  text-centre" align="center">
+				<div style="height: 105px" class="panel panel-danger">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Price</h3>
+				  </div>
+				  <div class="panel-body">
+				<i class="fa fa-btc" ></i> {{ price }} <p><i class="fa fa-usd" aria-hidden="true"></i>&nbsp;{{ priceUSD }}
+				  </div>
+				</div>
+			</div>
+
+
+
+	<div class="col-md-2  text-centre" align="center">
+				<div style="height: 105px" class="panel panel-primary">
+				  <div class="panel-heading">
+				    <h3 class="panel-title">Blocks</h3>
+				  </div>
+				  <div class="panel-body">
+				{{  Blocks }}
+				  </div>
+				</div>
+			</div>
+
+		</div>
+
+
+	</div>
+</div>
+<br>
+
+<div class="container" style="margin-top: 10px" role="main">
+	
+	<div align="center">
+
+		<div class="row">
+
+
+
+			<form method="POST" action="miner">
+				<div class="col-md-9">
+					<input class="form-control" id="address" name="address" placeholder="Insert a miner address..." value="" type="text">
+				</div>
+				<div class="col-md-3">
+					<input class="btn btn-primary btn-block" type="submit" value="Go"></input>
+				</div>
+			</form>
+
+
+		</div>
+	</div>
+
+<br>
+
+
+
+<div class="row"><div class="col-md-6"><h2 class="text-center">Features</h2><ul><li>Anonymous mining</li><li><strong>0-Variance </strong>solo mining (not implemented)</li><li>Global mining network with DDOS protected servers in the US, Europe and Asia</li><li>Unique <a href="http://ethpool.org/credits">payout scheme (not implemented)</a></li><li>All Ethereum miners supported (qtMiner, cudaminer, eth-proxy and ethminer)</li><li>Full <strong>stratum support</strong></li><li>Efficient mining engine, low uncle rates</li><li>We pay uncles & transaction fees</li><li>Detailed global and per-worker statistics</li><li>Invalid shares warnings</li><li>1% fee</li><li>Professional <a href="https://ethpool.freshdesk.com/">helpdesk</a></li><li>Third party <a href="https://play.google.com/store/apps/details?id=xyz.cryptomines.ethpool" target="_blank">Android Monitoring App</a></li></ul></div><div class="col-md-6"><h2 class="text-center">Top Miners</h2><table class="table table-condensed table-responsive">
+<thead>
+<tr>
+<th>Miner</th>
+<th>Hashrate</th>
+</tr>
+</thead>
+<tbody data-bind="foreach: topMiners">
+<tr>
+<td>
+0x {{ account }} 
+<!-- <a data-bind="attr: { href: '/miners/' + miner }, text: '0x' {{ cround['miners'] }}"></a>-->
+</td>
+<td data-bind="text: hashRate">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>
+</p><div class="well"><h3>How to connect</h3><div class="panel panel-default"><div class="panel-heading">Stratum mode using Genoils Miner</div><div class="panel-body"><h5>Download, configure and run Genoils Miner</h5><ul><li>Windows: <a href="https://github.com/Genoil/cpp-ethereum/tree/master/releases">Windows Builds</a></li><li>Source / Linux: <a href="https://github.com/Genoil/cpp-ethereum/">Build instructions</a></li></ul><h5>Then start your miners by putting the following commands into a bat file</h5><pre>setx GPU_FORCE_64BIT_PTR 0
+setx GPU_MAX_HEAP_SIZE 100
+setx GPU_USE_SYNC_OBJECTS 1
+setx GPU_MAX_ALLOC_PERCENT 100
+setx GPU_SINGLE_ALLOC_PERCENT 100
+ethminer.exe --farm-recheck 200 -G -S eu1.ethpool.org:3333 -FS us1.ethpool.org:3333 -O &lt;Your_Ethereum_Address&gt;.&lt;RigName&gt;</pre>This will use the eu1 server as main server and the us1 server as backup server<h5>Choose from the following stratum servers:</h5><pre>North America (East): us1.ethpool.org:3333
+North America (West): us2.ethpool.org:3333
+Europe: eu1.ethpool.org:3333
+Asia: asia1.ethpool.org:3333</pre></div></div><div class="panel panel-default"><div class="panel-heading">Stratum mode using Claymores Miner</div><div class="panel-body"><h5>Download, configure and run Genoils Miner</h5><ul><li>Windows: <a href="http://bitcointalk.org/index.php?topic=1433925.0">Bitcointalk Thread</a></li></ul><h5>Then start your miners by putting the following commands into a bat file</h5><pre>setx GPU_FORCE_64BIT_PTR 0
+setx GPU_MAX_HEAP_SIZE 100
+setx GPU_USE_SYNC_OBJECTS 1
+setx GPU_MAX_ALLOC_PERCENT 100
+setx GPU_SINGLE_ALLOC_PERCENT 100
+EthDcrMiner64.exe -epool eu1.ethpool.org:3333 -ewal &lt;Your_Ethereum_Address&gt;.&lt;RigName&gt; -epsw x</pre><h5>Choose from the following stratum servers:</h5><pre>North America (East): us1.ethpool.org:3333
+North America (West): us2.ethpool.org:3333
+Europe: eu1.ethpool.org:3333
+Asia: asia1.ethpool.org:3333</pre></div></div><div class="panel panel-default"><div class="panel-heading">Stratum mode using Stratum Proxy v0.0.5 by dwarfpool</div><div class="panel-body"><h5>Download, configure and run eth-proxy</h5><ul><li>Windows: <a href="http://ethpool.org/downloads/eth-proxy-win.zip">eth-proxy-win.zip</a></li><li>Source / Linux: <a href="http://ethpool.org/downloads/eth-proxy.zip">eth-proxy.zip</a></li><li>Github: <a href="https://github.com/Atrides/eth-proxy" target="_blank">eth-proxy</a></li></ul><h5>Then start your miners using the following command line</h5><pre>./ethminer --farm-recheck 200 -G -F http://127.0.0.1:8080/rig1</pre><h5>Use the following address & port as stratum server </h5><pre>North America (East): us1.ethpool.org:3333
+North America (West): us2.ethpool.org:3333
+Europe: eu1.ethpool.org:3333
+Asia: asia1.ethpool.org:3333</pre><small><a href="https://bitcointalk.org/index.php?topic=1200891" target="_blank">Installation guide</a></small></div></div><div class="panel panel-default"><div class="panel-heading">Stratum mode using QtMiner</div><div class="panel-body"><h5>Windows</h5><ul><li>Download QtMiner: <a href="http://ethpool.org/downloads/qtminer.zip">qtminer.zip</a></li><li>Extract the zip archive</li><li>Start QtMiner using the following command: qtminer.exe -u &lt;Your_Ethereum_Address&gt;.&lt;RigName&gt; -G</li><li>Full example:<pre>North America (East): qtminer.exe -s us1.ethpool.org:3333 -u 0x4bb96091ee9d802ed039c4d1a5f6216f90f81b01.rig1 -G
+North America (West): qtminer.exe -s us2.ethpool.org:3333 -u 0x4bb96091ee9d802ed039c4d1a5f6216f90f81b01.rig1 -G
+Europe: qtminer.exe -s eu1.ethpool.org:3333 -u 0x4bb96091ee9d802ed039c4d1a5f6216f90f81b01.rig1 -G
+Asia: qtminer.exe -s asia1.ethpool.org:3333 -u 0x4bb96091ee9d802ed039c4d1a5f6216f90f81b01.rig1 -G</pre></li></ul><h5>Ubuntu</h5><ul><li>Download QtMiner:<ul><li>Ubuntu 14.04: <a href="http://ethpool.org/downloads/qtminer2.tgz">qtminer.tgz</a></li><li>Ubuntu 15.04: <a href="http://ethpool.org/downloads/qtminer_1504.tgz">qtminer_1504.tgz</a></li></ul></li><li>Extract the archive: tar zxvf qtminer.tgz</li><li>Make the qtminer.sh script executable: chmod +x qtminer.sh</li><li>Start QtMiner using the following command: ./qtminer.sh -u &lt;Your_Ethereum_Address&gt;.&lt;RigName&gt; -G</li><li>Full example: <pre>North America (East): ./qtminer.sh -s us1.ethpool.org:3333 -u 0x4bb96091ee9d802ed039c4d1a5f6216f90f81b01.rig1 -G
+North America (West): ./qtminer.sh -s us2.ethpool.org:3333 -u 0x4bb96091ee9d802ed039c4d1a5f6216f90f81b01.rig1 -G
+Europe: ./qtminer.sh -s eu1.ethpool.org:3333 -u 0x4bb96091ee9d802ed039c4d1a5f6216f90f81b01.rig1 -G
+Asia: ./qtminer.sh -s asia1.ethpool.org:3333 -u 0x4bb96091ee9d802ed039c4d1a5f6216f90f81b01.rig1 -G</pre></li></ul><p>Source: <a href="http://github.com/etherchain-org/qtminer">http://github.com/etherchain-org/qtminer</a></p></div></div><div class="panel panel-default"><div class="panel-heading">Getwork mode using ethminer</div><div class="panel-body"><p>Mining using the standard ethminer is no longer recommended. Please use one of the available stratum enabled miners!</p><p>You need to have a working ethminer installation which comes with the c++ eth version of Ethereum. For installation instructions see <a href="https://ethereum.org/cli" target="_blank">ethereum.org/cli</a>.</p><p>To join the pool start up ethminer using the -F flag and point it to the following address<pre>http://us1.ethpool.org/miner/&lt;account&gt;.&lt;worker&gt;/&lt;hashrate&gt;</pre></p><p><b>&lt;account&gt;</b> is your ethereum account address where the pool payments will be send to.</p><p><b>&lt;hashrate&gt;</b> is the difficulty of the work packages you will receive from the pool. Set it by providing the hashrate of your ethminer instance in MH/s.</p><p>Full example to mine with a 10MH/s ethminer instance to address 0x4bb96091ee9d802ed039c4d1a5f6216f90f81b01:</p><p><pre>ethminer -F http://us1.ethpool.org/miner/0x4bb96091ee9d802ed039c4d1a5f6216f90f81b01.rig1/10 -G (+ your usual options)</pre></p><p>If you receive frequent "JSON-RPC Problem" errors try to increase your --farm-recheck value.</p><p>You should find a valid share every 1-2 minutes. If it constantly takes you longer to find a share try to lower your hashrate values (minimum is 0.1).</p></div></div></div><div class="row"><div class="col-md-6"><h2 class="text-center">Recently mined blocks</h2><table class="table table-condensed table-responsive"><thead><tr><th>Block</th><th>Mined By</th><th>Time</th></tr></thead><tbody data-bind="foreach: minedBlocks"><tr><td><a data-bind="attr: { href: 'https://etherchain.org/block/' + number }, text: number"></a></td><td><a data-bind="attr: { href: '/miners/' + miner }, text: '0x' + miner"></a></td><td data-bind="text: time"></td></tr></tbody></table><a href="https://etherchain.org/account/0x4bb96091ee9d802ed039c4d1a5f6216f90f81b01" role="button" class="btn btn-default">View all mined</a></div></div></div><script src="/javascripts/index.js"></script>
+</div>
+
+<hr><div class="container"><footer><p>© Ethpool 2016 | The Ethereum Mining Pool | <a href="https://ethpool.freshdesk.com">Contact us</a></p></footer></div></body></html>

@@ -1,0 +1,38 @@
+.c3-axis-y, .c3-axis-y2 text {
+   fill: white;
+   font-size:12px;
+}
+.c3-axis-x text {
+    font-size:12px;
+    fill:white;
+}
+
+.c3 path, .c3 line {
+  stroke: #8c8c8c;
+}
+
+.c3-chart-arc text {
+    fill: black;
+}
+
+.c3-tooltip{
+   color: black;
+}
+
+.c3-legend-item{
+   fill: white;
+}
+
+.c3-line {
+  stroke-width: 2px;
+}
+.popover{
+    max-width: 100%; /* Max Width of the popover (depending on the container!) */
+}
+.just_span{
+ margin: 5px; 
+}
+
+p.navbar-text {
+  color: white !important;
+}

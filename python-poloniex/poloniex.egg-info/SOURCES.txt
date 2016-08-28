@@ -1,0 +1,16 @@
+.gitignore
+LICENSE
+README.md
+setup.py
+examples/README.md
+examples/loanbot.py
+examples/polocalbox.py
+examples/localticker/tickcatcher.py
+examples/localticker/ticker.py
+poloniex/__init__.py
+poloniex.egg-info/PKG-INFO
+poloniex.egg-info/SOURCES.txt
+poloniex.egg-info/dependency_links.txt
+poloniex.egg-info/not-zip-safe
+poloniex.egg-info/requires.txt
+poloniex.egg-info/top_level.txt

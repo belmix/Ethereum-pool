@@ -1,0 +1,55 @@
+
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"><!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags--><meta name="description" content="The Ethereum Mining Pool"><meta name="author" content="ethpool.org"><meta name="keywords" content="ethereum, mining, pool, cryptocurrency, cryptocurrencies, bitcoin">
+
+<link rel="icon" href="static/favicon.ico">
+<title>Blocks - ethpool.org - The Ethereum Mining Pool</title><!-- Bootstrap core CSS--><link rel="stylesheet" href="static/bootstrap.min.css"><link rel="stylesheet" href="static/c3.min.css"><link rel="stylesheet" href="static/style.css"><style>body {
+padding-top: 50px;
+padding-bottom: 20px;
+}</style><!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries--><!--if lt IE 9script(src='https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js')
+script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
+
+--><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.3.0/knockout-min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/bignumber.js/2.0.7/bignumber.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/numeral.js/1.5.3/numeral.min.js"></script></head><body><nav class="navbar navbar-default navbar-fixed-top"><div class="container"><div class="navbar-header"><button type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar" class="navbar-toggle collapsed"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+
+
+<a href="/" class="navbar-brand"> <img src="static/mining_small.png" style="height: 25px"></a>
+</div>
+<div id="navbar" class="navbar-collapse collapse"><ul class="nav navbar-nav"><li><a href="/" title="Home">Home</a></li><li><a href="/blocks" title="Blocks">Blocks</a></li><li class="active"><a href="/credits" title="Credits">Credits</a></li><li><a href="/stats" title="Statistics">Statistics</a></li><li><a href="/faq" title="FAQ">FAQ</a></li><li><a href="https://ethpool.freshdesk.com" title="Get Support">Get Support</a></li></ul><p class="navbar-text">Next DAG: ( not implemented )</p>
+
+</div></div></nav><div id="blocks" class="container">
+
+<div id="credits" class="container"><h2>Miner credits (Top 100)</h2><p>Each submitted share will increase the credit of the miner who submitted the share by the share difficulty.</p><p>The miner who accumulated the most credits will receive the reward of the next mined block and his credits will be reset to his current credits minus the credits of the runner up miner.</p><p>Re-setting the credits of the miner who did receive the block reward to 0 was abandoned as it did penalize miners having an above average hashrate.</p><p>Usually a miner will receive a full block reward as soon as his accumulated credits equal the current block difficulty (+/- pool luck).</p><p>Uncles are paid on top of the full block rewards! Which means you will receive at least 5 Ether for the block, and if you are lucky up to 3.75 additional Ether for an uncle.</p>
+  
+
+<table class="table table-condensed table-bordered table-hover">
+<thead>
+  <tr>
+	<th>Rank</th>
+	<th>Miner</th>
+	<th>Hashrate</th>
+	<th>Estimated TtnB</th>
+	<th>Credits</th>
+  </tr>
+</thead>
+<tbody >
+<tr>
+<td></td>
+<td><a hfer="url"></a></td>
+<td ></td>
+<td>Waiting for next block</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Credits ( not implemented )</h4>
+<br>
+<h4>Example input account address:</h4>
+{{ r2 }}
+<br>
+<p></p>
+{{ item }}
+<br>
+  
+
+<hr><div class="container"><footer><p>© Ethpool 2016 | The Ethereum Mining Pool | <a href="https://ethpool.freshdesk.com">Contact us</a></p></footer></div></body></html>
