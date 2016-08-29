@@ -109,13 +109,23 @@ def faq ():
 @app.route("/credits")
 # функция credits возвращает шаблон credits.html
 def credits ():
-	# Запрос аккаунттов пула переменная 'r' и 'r1' приходит в виде списка
-	# Переменные 'r2' и  'item' первая и вторая строка списка
+	reward = BLOCK_REWARD - FEE
+	accounts = {}
+	totshare = 0
         c = EthJsonRpc('localhost', 8545)
 	posts = c.eth_accounts()
+	# conn = sqlite3.connect(DBSHARE_FILE)
+	# db = conn.cursor()
+	# for row in db.execute('SELECT miner, sum(share) FROM share GROUP BY miner'):
+	# 	accounts [row [0]] = row [1]
+	# 	totshare += row [1]
+	# for acc in accounts:
+	# 	racc = accounts[acc] * reward / float (totshare)
+	# conn.commit ()
+	# conn.close ()
+	return render_template('credits.html', cround=cround, posts=posts, server=SERVER_POOL)
 	# ЧТО НЕ СДЕЛАНО!
 	# Необходимо сформировать таблицу аккаунт, хэшрейт, шары
-	return render_template('credits.html', posts=posts, cround=cround, server=SERVER_POOL)
 
 # маршрут майнер возвращает шаблон miner.html с переменными аккаунт, выплаты, шары
 @app.route("/miner", methods=['POST'])
