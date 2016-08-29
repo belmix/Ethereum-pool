@@ -92,7 +92,7 @@ func main() {
 	// Set up logging
 	logInfo = log.New(os.Stderr, "INFO: ", log.Ldate|log.Ltime)
 	logError = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime)
-	logInfo.Println("Welcome to ethpool 2.0")
+	logInfo.Println("Welcome to ethpool 1.0")
 	logInfo.Println("Pool port is", poolPort)
 	logInfo.Println("Point your miners to: http://<ip>:" + poolPort + "/miner/{miner}/{difficulty}")
 
