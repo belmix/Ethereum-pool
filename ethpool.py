@@ -221,7 +221,7 @@ def db_thread ():
 			# Побдключаемся к базе данных выплат для записи данных о платежах
 			conn2 = sqlite3.connect(DBPAYOUT_FILE)
 			db2 = conn2.cursor()
-			# запускаем цикл перевода майнеру
+			# запускаем цикл перевода майнерам
 			for acc in accounts:
 				racc = accounts[acc] * reward / float (totshare)
 				# Вызов функции оплаты
