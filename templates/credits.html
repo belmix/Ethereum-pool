@@ -19,7 +19,6 @@ script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
 
 <div id="credits" class="container"><h2>Miner credits (Top 100)</h2><p>Each submitted share will increase the credit of the miner who submitted the share by the share difficulty.</p><p>The miner who accumulated the most credits will receive the reward of the next mined block and his credits will be reset to his current credits minus the credits of the runner up miner.</p><p>Re-setting the credits of the miner who did receive the block reward to 0 was abandoned as it did penalize miners having an above average hashrate.</p><p>Usually a miner will receive a full block reward as soon as his accumulated credits equal the current block difficulty (+/- pool luck).</p><p>Uncles are paid on top of the full block rewards! Which means you will receive at least 5 Ether for the block, and if you are lucky up to 3.75 additional Ether for an uncle.</p>
   
-
 <table class="table table-condensed table-bordered table-hover">
 <thead>
   <tr>
@@ -30,14 +29,18 @@ script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
 	<th>Credits</th>
   </tr>
 </thead>
+
 <tbody >
+{% for post in posts %}
 <tr>
-<td></td>
-<td><a hfer="url"></a></td>
-<td ></td>
-<td>Waiting for next block</td>
-<td></td>
+<td>-</td>
+<td>{{post}}</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+{% endfor %}
 </tr>
+
 </tbody>
 </table>
 
