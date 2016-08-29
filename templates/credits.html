@@ -31,17 +31,17 @@ script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')
 </thead>
 
 <tbody >
-{% for post in posts %}
+{% for acc in accounts %}
 <tr>
 <td>{{loop.index0+1}} </td>
-<td>{{post}}</td>
+<td>0x{{acc}}</td>
 <td>-</td>
 <td>-</td>
-<td>-</td>
+<td>{{totshare}}</td>
 {% endfor %}
 </tr>
-
 </tbody>
+
 </table>
 
 
