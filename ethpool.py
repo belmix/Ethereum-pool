@@ -168,7 +168,7 @@ def sendTransaction (address, value):
 	node_request ('eth_sendTransaction', [tx])
 
 
-
+# Поток приложения работает как служба ожидая условий для выполнения
 def db_thread ():
 	global cround, bl
 	conn = sqlite3.connect(DBSHARE_FILE)
@@ -191,29 +191,37 @@ def db_thread ():
 			croundlock.release ()
 		bllock.acquire ()
 
-		# New block, split the reward
+		# Событие найден блок
 		if bl:
 			bl = False
 			bllock.realease ()
-
+			# Обнуляем переменные адреса и шар
 			accounts = {}
 			totshare = 0
+			# Вычитаем из полученого блока коммисию пула
 			reward = BLOCK_REWARD - FEE
+			# Запрашиваем из базы данных адреса майнеров и количество отправленных шар
 			for row in db.execute('SELECT miner, sum(share) FROM share GROUP BY miner'):
 				accounts [row [0]] = row [1]
 				totshare += row [1]
 
 			# totshare : reward = sharegianni : rewardpergianni
+			# Делаем разблокировку выплат
 			paylock.acquire ()
+			# Побдключаемся к базе данных выплат для записи данных о платежах
 			conn2 = sqlite3.connect(DBPAYOUT_FILE)
 			db2 = conn2.cursor()
-
+			# запускаем цикл перевода майнеру
 			for acc in accounts:
 				racc = accounts[acc] * reward / float (totshare)
+				# Вызов функции оплаты
 				sendTransaction (acc, racc)
+				# Запись в базу выплат информации об оплате
 				db2.execute ('INSERT INTO payout VALUES (?,?,?,?)', [acc, accounts[acc], totshare, racc, str (time.time ())])	
 			conn2.commit ()
+			# отключаемся от базы
 			conn2.close ()
+			#  Закрываем возможность выплат, защита пула
 			paylock.release()
 
 			db.execute ('DELETE FROM share')	
