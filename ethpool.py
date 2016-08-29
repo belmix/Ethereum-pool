@@ -112,13 +112,10 @@ def credits ():
 	# Запрос аккаунттов пула переменная 'r' и 'r1' приходит в виде списка
 	# Переменные 'r2' и  'item' первая и вторая строка списка
         c = EthJsonRpc('localhost', 8545)
-	r = c.eth_accounts()
-	r1 = c.eth_accounts()
-	r2 = r1.pop(0)
-	item = r.pop(1)
+	posts = c.eth_accounts()
 	# ЧТО НЕ СДЕЛАНО!
 	# Необходимо сформировать таблицу аккаунт, хэшрейт, шары
-	return render_template('credits.html', r=r, r1=r1, r2=r2, item=item, cround=cround, server=SERVER_POOL)
+	return render_template('credits.html', posts=posts, cround=cround, server=SERVER_POOL)
 
 # маршрут майнер возвращает шаблон miner.html с переменными аккаунт, выплаты, шары
 @app.route("/miner", methods=['POST'])
