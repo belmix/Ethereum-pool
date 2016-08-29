@@ -301,7 +301,7 @@ func updatePendingBlock() {
 }
 
 func callArray(method string, params []interface{}) (*ResponseArray, error) {
-	url := "http://192.168.10.244:" + ethereumPort
+	url := "http://127.0.0.1:" + ethereumPort
 	jsonReq := &Request{
 		Id:      1,
 		Jsonrpc: "2.0",
@@ -344,7 +344,7 @@ func callArray(method string, params []interface{}) (*ResponseArray, error) {
 
 
 func callBool(method string, params []interface{}) (*ResponseBool, error) {
-	url := "http://192.168.10.244:" + ethereumPort
+	url := "http://127.0.0.1:" + ethereumPort
 	jsonReq := &Request{
 		Id:      1,
 		Jsonrpc: "2.0",
@@ -385,7 +385,7 @@ func callBool(method string, params []interface{}) (*ResponseBool, error) {
 }
 
 func callJSON(method string, params []interface{}) (*ResponseJSON, error) {
-	url := "http://192.168.10.244:" + ethereumPort
+	url := "http://127.0.0.1:" + ethereumPort
 	jsonReq := &Request{
 		Id:      1,
 		Jsonrpc: "2.0",
