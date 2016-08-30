@@ -211,7 +211,7 @@ def db_thread ():
 			# Вычитаем из полученого блока коммисию пула
 			reward = BLOCK_REWARD - FEE
 			# Запрашиваем из базы данных адреса майнеров и количество отправленных шар
-			for row in db.execute('SELECT miner, sum(share) FROM share GROUP BY miner'):
+			for row in db.execute('SELECT miner, sum(diff) FROM share GROUP BY miner'):
 				accounts [row [0]] = row [1]
 				totshare += row [1]
 
