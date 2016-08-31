@@ -1,6 +1,6 @@
 ![Miner's stats page](https://raw.githubusercontent.com/belmix/Ethereum-pool/master/pool_main.png)
 
-# Pool server
+# Pool server (realized the possibility of mining and payments, no display of some information)
 
 This software includes:
 * A pool master for miner handling
