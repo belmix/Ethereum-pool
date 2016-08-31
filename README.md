@@ -1,4 +1,5 @@
-https://raw.githubusercontent.com/belmix/Ethereum-pool/master/pool_main.png
+![Miner's stats page](https://raw.githubusercontent.com/belmix/Ethereum-pool/master/pool_main.png)
+
 # Pool server
 
 This software includes:
@@ -23,6 +24,7 @@ The software is not well tested and it's a work in progress, use at your own ris
 * python2 flask
 * python2 requests
 * python2 pysqlite3
+* python poloniex
 
 ## Configuration
 
