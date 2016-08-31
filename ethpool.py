@@ -63,7 +63,7 @@ def node_request (command, args = []):
 # функция index возвращает шаблон index.html c переменными курса валют от BTC и USD
 # ЧТО НЕ СДЕЛАНО!
 # НЕОБХОДИМО РЕАЛИЗОВАТЬ ПОЛУЧЕНИЕ ИНФОРМАЦИИ О КОЛИЧЕСТВЕ WORKERS НА ПУЛЕ ВЫВЕСТИ ТАБЛИЦУ ТОП 10 МАЙНЕРОВ ПО HASHRATE, 
-# СДЕЛАТЬ ВЫВОД ОСТАВШЕГОСЯ ВРЕМЕНИ ДО ОБНОВЛЕНИЯ DAG
+# СДЕЛАТЬ ВЫВОД ОСТАВШЕГОСЯ ВРЕМЕНИ ДО ОБНОВЛЕНИЯ DAG, СДЕЛАТЬ ВЫВОД HASHRATE ПУЛА
 def index():
 	# price курс BTC_ETH
 	ticker = polo.api('returnTicker')
@@ -148,7 +148,7 @@ def credits ():
 def miner ():
 	# ЧТО НЕ СДЕЛАНО!
 	# Необходимо вывести количество workers, общий хэшрейт майнера
-	# Необходимо сформировать таблицу название workers,, хэшрейт workers, усреднённый хэшрейт workers, шары workers
+	# Необходимо сформировать таблицу название workers, хэшрейт workers, усреднённый хэшрейт workers, шары workers
 	address = request.form['address'].replace ('0x', '')
 	payouts = []
 	paylock.acquire ()
