@@ -12,8 +12,9 @@ from threading import Thread, Lock
 import Queue
 from ethjsonrpc import EthJsonRpc
 methods = [
-    'eth_hashrate',
-    'eth_accounts',
+	'eth_hashrate',
+	'eth_accounts',
+	'eth_blockNumber',
 ]
 import poloniex
 
@@ -74,11 +75,25 @@ def index():
 	allprice2 = (ticker2['USDT_ETH'])
         price2 = allprice2['last']
 	priceUSD = price2[0:5]
+	accounts = {}
+	totshare = 0
+	reward = BLOCK_REWARD - FEE
+	c = EthJsonRpc('localhost', 8545)
+	posts = c.eth_accounts()
+	conn = sqlite3.connect(DBSHARE_FILE)
+	db = conn.cursor()
+	for row in db.execute('SELECT miner, sum(diff) FROM share GROUP BY miner'):
+	 	accounts [row [0]] = row [1]
+		totshare += row [1]
+	for acc in accounts:
+		racc = accounts[acc] * reward / float (totshare)
+	conn.commit ()
+	conn.close ()
 	# запрос хэшрейтинга пула и количества блоков сети
 	c = EthJsonRpc('localhost', 8545)
 	Hashrate = c.eth_hashrate()
 	Blocks = c.eth_blockNumber()
-	return render_template('index.html', price=price, priceUSD=priceUSD, Hashrate=Hashrate, Blocks=Blocks, cround=cround, server=SERVER_POOL)
+	return render_template('index.html', price=price, priceUSD=priceUSD, Blocks=Blocks, accounts=accounts, Hashrate=Hashrate, totshare=totshare, cround=cround, server=SERVER_POOL)
 
 # маршрут блоки возвращает blocks.html
 @app.route("/blocks")
@@ -112,7 +127,7 @@ def credits ():
 	reward = BLOCK_REWARD - FEE
 	accounts = {}
 	totshare = 0
-        c = EthJsonRpc('localhost', 8545)
+	c = EthJsonRpc('localhost', 8545)
 	posts = c.eth_accounts()
 	conn = sqlite3.connect(DBSHARE_FILE)
 	db = conn.cursor()
@@ -123,7 +138,7 @@ def credits ():
 		racc = accounts[acc] * reward / float (totshare)
 	conn.commit ()
 	conn.close ()
-	return render_template('credits.html', cround=cround, posts=posts, accounts=accounts, totshare=totshare, server=SERVER_POOL)
+	return render_template('credits.html', cround=cround, accounts=accounts, posts=posts, totshare=totshare, server=SERVER_POOL)
 	# ЧТО НЕ СДЕЛАНО!
 	# Необходимо сформировать таблицу аккаунт, хэшрейт, шары (аккаунт - шары сделано)
 
