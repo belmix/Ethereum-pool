@@ -127,6 +127,7 @@ def credits ():
 	reward = BLOCK_REWARD - FEE
 	accounts = {}
 	totshare = 0
+	worker = {}
 	c = EthJsonRpc('localhost', 8545)
 	posts = c.eth_accounts()
 	conn = sqlite3.connect(DBSHARE_FILE)
@@ -134,11 +135,13 @@ def credits ():
 	for row in db.execute('SELECT miner, sum(diff) FROM share GROUP BY miner'):
 	 	accounts [row [0]] = row [1]
 		totshare += row [1]
+	for row in db.execute('SELECT miner, worker FROM share GROUP BY miner'):
+	 	worker [row [0]] = row [1]
 	for acc in accounts:
 		racc = accounts[acc] * reward / float (totshare)
 	conn.commit ()
 	conn.close ()
-	return render_template('credits.html', cround=cround, accounts=accounts, posts=posts, totshare=totshare, server=SERVER_POOL)
+	return render_template('credits.html', cround=cround, worker=worker, accounts=accounts, posts=posts, totshare=totshare, server=SERVER_POOL)
 	# ЧТО НЕ СДЕЛАНО!
 	# Необходимо сформировать таблицу аккаунт, хэшрейт, шары (аккаунт - шары сделано)
 
@@ -152,6 +155,25 @@ def miner ():
 	address = request.form['address'].replace ('0x', '')
 	payouts = []
 	paylock.acquire ()
+	reward = BLOCK_REWARD - FEE
+	accounts = {}
+	totshare = 0
+	worker = {}
+	c = EthJsonRpc('localhost', 8545)
+	posts = c.eth_accounts()
+	conn = sqlite3.connect(DBSHARE_FILE)
+	db = conn.cursor()
+	for row in db.execute('SELECT miner, sum(diff) FROM share GROUP BY miner'):
+	 	accounts [row [0]] = row [1]
+		totshare += row [1]
+	for row in db.execute('SELECT miner, worker FROM share GROUP BY miner'):
+	 	worker [row [0]] = row [1]
+                
+	for acc in accounts:
+		workers = worker[acc]
+		racc = accounts[acc] * reward / float (totshare)
+	conn.commit ()
+	conn.close ()
 	conn2 = sqlite3.connect(DBPAYOUT_FILE)
       	db2 = conn2.cursor()
 
@@ -167,7 +189,7 @@ def miner ():
 	else:
 		rshare = 0
 	print rshare, cround
-	return render_template('miner.html',  address=address, payouts=payouts, shares=rshare)
+	return render_template('miner.html',  address=address, workers=workers, payouts=payouts, shares=rshare)
 
 @app.route("/submit", methods=['POST'])
 def submitShare ():
