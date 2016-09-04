@@ -23,7 +23,7 @@ import poloniex
 SECRET = "CHANGETHIS"
 # адрес веб интерфейса должен совпадать с указаным в 
 # /usr/local/lib/python2.7/dist-packages/flask/app.py
-SERVER_NAME = "localhost:5000"
+SERVER_NAME = "192.168.10.244:5000"
 # адрес пула для подключения майнеров
 SERVER_POOL = "localhost:5082"
 # базы данных
@@ -63,7 +63,7 @@ def node_request (command, args = []):
 # функция index возвращает шаблон index.html c переменными курса валют от BTC и USD
 # ЧТО НЕ СДЕЛАНО!
 # НЕОБХОДИМО РЕАЛИЗОВАТЬ ПОЛУЧЕНИЕ ИНФОРМАЦИИ О КОЛИЧЕСТВЕ WORKERS НА ПУЛЕ ВЫВЕСТИ ТАБЛИЦУ ТОП 10 МАЙНЕРОВ ПО HASHRATE, 
-# СДЕЛАТЬ ВЫВОД ОСТАВШЕГОСЯ ВРЕМЕНИ ДО ОБНОВЛЕНИЯ DAG, СДЕЛАТЬ ВЫВОД HASHRATE ПУЛА
+# СДЕЛАТЬ ВЫВОД ОСТАВШЕГОСЯ ВРЕМЕНИ ДО ОБНОВЛЕНИЯ DAG
 def index():
 	# price курс BTC_ETH
 	ticker = polo.api('returnTicker')
@@ -131,7 +131,7 @@ def credits ():
 	posts = c.eth_accounts()
 	conn = sqlite3.connect(DBSHARE_FILE)
 	db = conn.cursor()
-	for row in db.execute('SELECT miner, sum(diff) FROM share GROUP BY miner'):
+	for row in db.execute('SELECT miner, sum(share) FROM share GROUP BY miner'):
 	 	accounts [row [0]] = row [1]
 		totshare += row [1]
 	for acc in accounts:
@@ -148,7 +148,7 @@ def credits ():
 def miner ():
 	# ЧТО НЕ СДЕЛАНО!
 	# Необходимо вывести количество workers, общий хэшрейт майнера
-	# Необходимо сформировать таблицу название workers, хэшрейт workers, усреднённый хэшрейт workers, шары workers
+	# Необходимо сформировать таблицу название workers,, хэшрейт workers, усреднённый хэшрейт workers, шары workers
 	address = request.form['address'].replace ('0x', '')
 	payouts = []
 	paylock.acquire ()
@@ -172,6 +172,7 @@ def miner ():
 @app.route("/submit", methods=['POST'])
 def submitShare ():
 	data = request.form
+	if data['secret'] == SECRET:
 		shqueue.put ((data['miner'], data['mixdigest'], data['diff'], data['worker'], str (time.time ())))
 	return ''
 
@@ -267,7 +268,7 @@ if __name__ == "__main__":
 		try:
 			conn = sqlite3.connect(DBSHARE_FILE)
 			db = conn.cursor()
-			db.execute('''CREATE TABLE share (miner text, mixdigest text, diff text, rig text, date text)''')
+			db.execute('''CREATE TABLE share (miner text, mixdigest text, diff text, worker text, date text)''')
 			conn.commit()
 			conn.close()
 		except:
