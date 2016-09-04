@@ -49,5 +49,8 @@ Now edit ethpool.py:
 3. Start the pool server with ``` python ethpool.py start ```
 4. go http://localhost:5000/
 
+## Connect
+http://<ip>:5082/miner/{miner}/{difficulty}/{worker}
+
 ## contact 
 admin@belmix.ru
