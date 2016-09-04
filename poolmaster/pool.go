@@ -95,7 +95,7 @@ func main() {
 	logError = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime)
 	logInfo.Println("Welcome to ethpool 1.0")
 	logInfo.Println("Pool port is", poolPort)
-	logInfo.Println("Point your miners to: http://<ip>:" + poolPort + "/miner/{miner}/{difficulty}")
+	logInfo.Println("Point your miners to: http://<ip>:" + poolPort + "/miner/{miner}/{difficulty}/{rig}")
 
 	go updateWork()
 	go updatePendingBlock()
@@ -107,7 +107,7 @@ func main() {
 
 	// fmt.Scanln()
 	r := mux.NewRouter()
-	r.HandleFunc("/miner/{miner}/{difficulty}", handleMiner)
+	r.HandleFunc("/miner/{miner}/{difficulty}/{rig}", handleMiner)
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":5082", nil))
 }
@@ -132,9 +132,17 @@ func handleMiner(rw http.ResponseWriter, req *http.Request) {
 		fmt.Fprint(rw, getErrorResponse("Invalid miner & worker provided: "+vars["miner"]))
 		return
 	}
+	
+	rigArray := strings.Split(vars["rig"], ".")
 
+	if len(rigArray) == 0 || len(rigArray) > 0 {
+		logError.Println("Invalid worker provided: " + vars["rig"])
+		fmt.Fprint(rw, getErrorResponse("Invalid worker provided: "+vars["rig"]))
+		return
+	}
+	
 	miner := strings.Replace(minerArray[0], "0x", "", -1)
-	worker := "default"
+	worker := strings.Replace(rigArray[0], "0x", "", -1)
 
 	if len(minerArray) == 2 {
 		worker = minerArray[1]
@@ -200,7 +208,7 @@ func handleMiner(rw http.ResponseWriter, req *http.Request) {
 				http.PostForm("http://192.168.10.244:5000/foundblock", url.Values{})
 			}
 
-			logInfo.Println("Miner", miner, ".", worker, "found valid share (Diff:", minerAdjustedDifficulty, "Mix:", mixDigest, "Hash:", hashNoNonce, "Nonce:", nonce, ")")
+			logInfo.Println("Miner", miner, "Worker", worker, "found valid share (Diff:", minerAdjustedDifficulty, "Mix:", mixDigest, "Hash:", hashNoNonce, "Nonce:", nonce, ")")
 			http.PostForm("http://192.168.10.244:5000/submit", url.Values{"secret": {secret}, "mixdigest": {mixDigest}, "miner": {miner}, "diff": {strconv.FormatInt(minerAdjustedDifficulty, 10)}, "worker": {worker}})
 		} else {
 			logError.Println("Miner", miner, "provided invalid share")
