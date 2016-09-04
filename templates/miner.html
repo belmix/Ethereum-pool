@@ -152,6 +152,8 @@ script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')-->
 		</table>
 
 <h2>Hashrate, Shares & Workers:(not realese)</h2> 
+
+
 		<table class="table">
 		{% for payout in payouts %}
 		    <tr>{{ payout }}</tr>
@@ -160,16 +162,28 @@ script(src='https://oss.maxcdn.com/respond/1.4.2/respond.min.js')-->
 
 
 <h2>Workers:(not realese)</h2> 
-		<table class="table">
-		{% for payout in payouts %}
-		    <tr>{{ payout }}</tr>
-		{% endfor %}
-		</table>
 
 
+<table class="table table-condensed table-bordered table-hover">
+<thead>
+  <tr>
+	<th>№</th>
+	<th>Worker</th>
+	<th>Current Hashrate</th>
+	<th>Hashrate (1h)</th>
+  </tr>
+</thead>
 
+<tbody >
+<tr>
+<td>-</td>
+<td>{{workers}}</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody>
 
-
+</table>
 	</div>
 </div>
 <br>
