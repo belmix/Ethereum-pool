@@ -50,7 +50,7 @@ Now edit ethpool.py:
 4. go http://localhost:5000/
 
 ## Connect
-http://<ip>:5082/miner/{miner}/{difficulty}/{worker}
+http://IP:5082/miner/{miner}/{difficulty}/{worker}
 
 ## contact 
 admin@belmix.ru
