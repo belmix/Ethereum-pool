@@ -172,8 +172,7 @@ def miner ():
 @app.route("/submit", methods=['POST'])
 def submitShare ():
 	data = request.form
-	if data['secret'] == SECRET:
-		shqueue.put ((data['miner'], data['mixdigest'], data['diff'], str (time.time ())))
+		shqueue.put ((data['miner'], data['mixdigest'], data['diff'], data['worker'], str (time.time ())))
 	return ''
 
 @app.route("/foundblock", methods=['POST'])
@@ -202,7 +201,7 @@ def db_thread ():
 	while True:	
 		for x in range (10):
 			item = shqueue.get()
-			db.execute ('INSERT INTO share VALUES (?,?,?,?)', item)	
+			db.execute ('INSERT INTO share VALUES (?,?,?,?,?)', item)	
 			shqueue.task_done()
 			conn.commit ()
 
@@ -268,7 +267,7 @@ if __name__ == "__main__":
 		try:
 			conn = sqlite3.connect(DBSHARE_FILE)
 			db = conn.cursor()
-			db.execute('''CREATE TABLE share (miner text, mixdigest text, diff text, date text)''')
+			db.execute('''CREATE TABLE share (miner text, mixdigest text, diff text, rig text, date text)''')
 			conn.commit()
 			conn.close()
 		except:
