@@ -95,7 +95,7 @@ func main() {
 	logError = log.New(os.Stderr, "ERROR: ", log.Ldate|log.Ltime)
 	logInfo.Println("Welcome to ethpool 1.0")
 	logInfo.Println("Pool port is", poolPort)
-	logInfo.Println("Point your miners to: http://<ip>:" + poolPort + "/miner/{miner}/{difficulty}/{rig}")
+	logInfo.Println("Point your miners to: http://<ip>:" + poolPort + "/miner/{miner}/{difficulty}/{worker}")
 
 	go updateWork()
 	go updatePendingBlock()
@@ -107,7 +107,7 @@ func main() {
 
 	// fmt.Scanln()
 	r := mux.NewRouter()
-	r.HandleFunc("/miner/{miner}/{difficulty}/{rig}", handleMiner)
+	r.HandleFunc("/miner/{miner}/{difficulty}/{worker}", handleMiner)
 	http.Handle("/", r)
 	log.Fatal(http.ListenAndServe(":5082", nil))
 }
@@ -132,20 +132,20 @@ func handleMiner(rw http.ResponseWriter, req *http.Request) {
 		fmt.Fprint(rw, getErrorResponse("Invalid miner & worker provided: "+vars["miner"]))
 		return
 	}
-	
-	rigArray := strings.Split(vars["rig"], ".")
 
-	if len(rigArray) == 0 || len(rigArray) > 0 {
-		logError.Println("Invalid worker provided: " + vars["rig"])
-		fmt.Fprint(rw, getErrorResponse("Invalid worker provided: "+vars["rig"]))
+	workerArray := strings.Split(vars["worker"], ".")
+
+	if len(workerArray) == 0 || len(workerArray) > 2 {
+		logError.Println("Invalid miner & worker provided: " + vars["worker"])
+		fmt.Fprint(rw, getErrorResponse("Invalid miner & worker provided: "+vars["worker"]))
 		return
 	}
 	
 	miner := strings.Replace(minerArray[0], "0x", "", -1)
-	worker := strings.Replace(rigArray[0], "0x", "", -1)
+	worker := strings.Replace(workerArray[0], "0x", "", -1)
 
 	if len(minerArray) == 2 {
-		worker = minerArray[1]
+		worker = workerArray[1]
 	}
 
 	if len(miner) != 40 {
