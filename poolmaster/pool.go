@@ -14,6 +14,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	// online package actual downloads, offline build fast
 	"github.com/ethereum/ethash"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/gorilla/mux"
